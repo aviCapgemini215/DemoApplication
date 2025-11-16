@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+# Trigger the action on push to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js (if needed for build, otherwise you can skip this step)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # Step 3: Install dependencies (if any, e.g., for building the site)
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build your site (skip this if your site doesn't require a build process)
+      - name: Build the site
+        run: npm run build
+
+      # Step 5: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages      # Target branch to deploy to (usually 'gh-pages')
+          folder: ./            # The folder to deploy (default is the root folder)
+          token: ${{ secrets.avitoken  }}  # Use GitHub's built-in token for authentication
