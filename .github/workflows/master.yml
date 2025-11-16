@@ -19,7 +19,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.AVI_TOKEN }}  # Use the GitHub token for authentication
-          folder: ./public  # The folder containing your static files
+          folder: ./  # The folder containing your static files
 
       # Step 3: Display GitHub Pages URL
       - name: Display GitHub Pages URL
