@@ -31,8 +31,4 @@ jobs:
           token: ${{ secrets.avitoken }}  # Make sure you have this secret added in GitHub settings
           folder: ./dist  # Change this to your build output directory (e.g., `./dist`, `./build`, etc.)
 
-      # Step 4: Display GitHub Pages URL (optional, just for confirmation)
-      - name: Display GitHub Pages URL
-        if: always()
-        run: |
-          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/Todoapp"
+   
