@@ -35,5 +35,5 @@ jobs:
         with:
           branch: gh-pages      # Target branch to deploy to (usually 'gh-pages')
           folder: ./            # The folder to deploy (default is the root folder)
-          token: ${{ secrets.avitoken  }}  # Use GitHub's built-in token for authentication
+          token: ${{ secrets.avitoken  }}  
     
