@@ -3,31 +3,25 @@ name: Deploy to GitHub Pages Update
 on:
   push:
     branches:
-      - master  # Change this to your main branch name, if necessary
+      - master  # Or your main branch name, if needed
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository code
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.AVI_TOKEN }}  # Use a personal access token (create it as a secret if not already)
 
-    # Step 2: Deploy to GitHub Pages (skip build if you're using static files)
+      # Step 2: Deploy to GitHub Pages (if your HTML files are in the root)
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.AVI_TOKEN }}  # Use the GitHub token from secrets
-          folder: ./dist  # Adjust this to point to your static files directory
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
+          publish_dir: ./dist  # This refers to the root directory (change this if your files are in a folder like 'public')
 
-      # Step 3: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.AVI_TOKEN }}  # Make sure you have this secret added in GitHub settings
-          folder: ./dist  # Change this to your build output directory (e.g., `./dist`, `./build`, etc.)
-
-   
+      # Step 3: Display GitHub Pages URL
+      - name: Display GitHub Pages URL
+        run: |
+          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/${{ github.repository }}"
