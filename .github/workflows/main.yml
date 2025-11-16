@@ -36,13 +36,4 @@ jobs:
           branch: gh-pages      # Target branch to deploy to (usually 'gh-pages')
           folder: ./            # The folder to deploy (default is the root folder)
           token: ${{ secrets.avitoken  }}  # Use GitHub's built-in token for authentication
-          
-           publish_dir: ./dist # Or your build output directory
-
-          - name: Display GitHub Pages URL
-
-            if: always()
-
-            run: |
-
-              echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/Todoapp"
+    
