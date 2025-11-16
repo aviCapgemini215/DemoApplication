@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages Update
 on:
   push:
     branches:
-      - master  # Change this to your main branch name, if necessary
+      - feature/scheduler  # Change this to your main branch name, if necessary
 
 jobs:
   build-and-deploy:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          github_token: ${{ secrets.avitoken }}  # Use a personal access token (create it as a secret if not already)
+          token: ${{ secrets.avitoken }}  # Use a personal access token (create it as a secret if not already)
 
       # Step 2: Build the project (if necessary, adjust according to your build process)
       # You can include a build step here if your project requires one (e.g., npm build, etc.)
@@ -28,10 +28,10 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.avitoken }}  # Make sure you have this secret added in GitHub settings
-          publish_dir: ./dist  # Change this to your build output directory (e.g., `./dist`, `./build`, etc.)
+          token: ${{ secrets.avitoken }}  # Make sure you have this secret added in GitHub settings
+          folder: ./dist  # Change this to your build output directory (e.g., `./dist`, `./build`, etc.)
 
-      # Step 4: Display the GitHub Pages URL (optional, just for confirmation)
+      # Step 4: Display GitHub Pages URL (optional, just for confirmation)
       - name: Display GitHub Pages URL
         if: always()
         run: |
