@@ -16,13 +16,12 @@ jobs:
         with:
           token: ${{ secrets.AVI_TOKEN }}  # Use a personal access token (create it as a secret if not already)
 
-      # Step 2: Build the project (if necessary, adjust according to your build process)
-      # You can include a build step here if your project requires one (e.g., npm build, etc.)
-      # Example (uncomment if needed):
-      - name: Build the project
-        run: |
-          npm install
-          npm run build
+    # Step 2: Deploy to GitHub Pages (skip build if you're using static files)
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.AVI_TOKEN }}  # Use the GitHub token from secrets
+          folder: ./dist  # Adjust this to point to your static files directory
 
       # Step 3: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
