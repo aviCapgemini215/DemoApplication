@@ -28,8 +28,8 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.avitoken }}  # Make sure you have this secret added in GitHub settings
-          folder: ./dist  # Change this to your build output directory (e.g., `./dist`, `./build`, etc.)
+          token: ${{ secrets.avitoken }}  
+          folder: ./dist 
 
       # Step 4: Display GitHub Pages URL (optional, just for confirmation)
       - name: Display GitHub Pages URL
