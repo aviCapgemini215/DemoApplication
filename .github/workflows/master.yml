@@ -14,12 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Deploy to GitHub Pages (if your HTML files are in the root)
+      # Step 2: Deploy to GitHub Pages (if your HTML files are in the 'public' folder)
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
-          publish_dir: ./dist  # This refers to the root directory (change this if your files are in a folder like 'public')
+          token: ${{ secrets.AVI_TOKEN }}  # Use the GitHub token for authentication
+          folder: ./public  # The folder containing your static files
 
       # Step 3: Display GitHub Pages URL
       - name: Display GitHub Pages URL
