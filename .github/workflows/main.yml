@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages Update
 on:
   push:
     branches:
-      - feature/scheduler  # Change this to your main branch name, if necessary
+      - master  # Change this to your main branch name, if necessary
 
 jobs:
   build-and-deploy:
