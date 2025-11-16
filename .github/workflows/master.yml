@@ -1,27 +1,27 @@
-name: Deploy to GitHub Pages update
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - master  # Replace with your main branch name (it could be 'main' if that's what you're using)
+      - main  # Change this if you're using a different branch (like 'master')
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Deploy to GitHub Pages (deploy from the root directory)
+      # Step 2: Deploy to GitHub Pages (from the root directory)
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.AVI_TOKEN }}  
-          folder: ./  # Root directory of your repository
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
+          folder: ./  # This points to the root directory (where your index.html should be)
 
-      # Step 3: Display GitHub Pages URL
+      # Step 3: Display the URL of the GitHub Pages site
       - name: Display GitHub Pages URL
         run: |
           echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/${{ github.repository }}"
