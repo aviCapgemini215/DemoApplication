@@ -1,39 +1,38 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages Update
 
-# Trigger the action on push to the 'main' branch
 on:
   push:
     branches:
-      - main
+      - feature/scheduler  # Change this to your main branch name, if necessary
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       # Step 1: Checkout the repository code
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # Step 2: Set up Node.js (if needed for build, otherwise you can skip this step)
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
-          node-version: '14'
+          github_token: ${{ secrets.avitoken }}  # Use a personal access token (create it as a secret if not already)
 
-      # Step 3: Install dependencies (if any, e.g., for building the site)
-      - name: Install dependencies
-        run: npm install
+      # Step 2: Build the project (if necessary, adjust according to your build process)
+      # You can include a build step here if your project requires one (e.g., npm build, etc.)
+      # Example (uncomment if needed):
+      # - name: Build the project
+      #   run: |
+      #     npm install
+      #     npm run build
 
-      # Step 4: Build your site (skip this if your site doesn't require a build process)
-      - name: Build the site
-        run: npm run build
-
-      # Step 5: Deploy to GitHub Pages
+      # Step 3: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages      # Target branch to deploy to (usually 'gh-pages')
-          folder: ./            # The folder to deploy (default is the root folder)
-          token: ${{ secrets.avitoken  }}  
-    
+          github_token: ${{ secrets.avitoken }}  # Make sure you have this secret added in GitHub settings
+          publish_dir: ./dist  # Change this to your build output directory (e.g., `./dist`, `./build`, etc.)
+
+      # Step 4: Display the GitHub Pages URL (optional, just for confirmation)
+      - name: Display GitHub Pages URL
+        if: always()
+        run: |
+          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/Todoapp"
