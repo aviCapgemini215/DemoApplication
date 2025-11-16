@@ -1,40 +1,27 @@
-name: Deploy to GitHub Pages Update
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - feature/scheduler  # Change this to your main branch name, if necessary
+      - master  # Replace with your main branch name (it could be 'main' if that's what you're using)
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository code
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.avitoken }}  # Use a personal access token (create it as a secret if not already)
 
-      # Step 2: Install dependencies (only if you're using npm)
-      - name: Install dependencies
-        run: |
-          npm install
-
-      # Step 3: Build the project (this will generate the dist folder)
-      - name: Build the project
-        run: |
-          npm run build  # This command will generate the dist folder or whatever your build process creates
-
-      # Step 4: Deploy to GitHub Pages
+      # Step 2: Deploy to GitHub Pages (deploy from the root directory)
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.avitoken }}
-          folder: ./dist  # Ensure this points to the correct output folder
+          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+          folder: ./  # Root directory of your repository
 
-      # Step 5: Display GitHub Pages URL
+      # Step 3: Display GitHub Pages URL
       - name: Display GitHub Pages URL
-        if: always()
         run: |
-          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/Todoapp"
+          echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/${{ github.repository }}"
