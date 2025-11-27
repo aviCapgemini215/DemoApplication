@@ -14,14 +14,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Deploy to GitHub Pages (from the root directory)
+      # Step 2: Ensure the repository is clean and there are no issues
+      - name: Clean up repository (Optional, can help with some git errors)
+        run: |
+          git clean -fd
+          git reset --hard
+          git status
+
+      # Step 3: Deploy to GitHub Pages (from the root directory or subdirectory if necessary)
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.AVI_TOKEN }}  # Use the GitHub token for authentication
-          folder: ./  # This points to the root directory (where your index.html should be)
+          token: ${{ secrets.AVI_TOKEN }}  # Ensure this secret is set in your repo settings
+          folder: ./  # Change this if your index.html is in a subfolder like './docs' or './public'
 
-      # Step 3: Display the URL of the GitHub Pages site
+      # Step 4: Display the GitHub Pages URL for confirmation
       - name: Display GitHub Pages URL
         run: |
           echo "GitHub Pages URL: https://${{ github.repository_owner }}.github.io/${{ github.repository }}"
+
