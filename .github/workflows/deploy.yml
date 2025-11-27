@@ -18,7 +18,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.Avi01 }}  # GitHub token for authentication
+          token: ${{ secrets.AVI_TOKEN }}  # GitHub token for authentication
           folder: ./  # Root directory of your repository
 
       # Step 3: Display GitHub Pages URL
